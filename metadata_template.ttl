@@ -7,12 +7,12 @@
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix skosthes: <http://purl.org/iso25964/skos-thes#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix temp-vocab: <http://www.fairdatacollective.com/template-vocabulary/> .
 @prefix qb: <http://purl.org/linked-data/cube#> .
 @prefix dct: <http://purl.org/dc/terms/> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix doap: <http://usefulinc.com/ns/doap#> .
 @prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix meta: <http://www.fairdatacollective.com/template-vocabulary/> .
 @prefix dcat: <http://www.w3.org/ns/dcat#> .
 @prefix euvoc: <http://publications.europa.eu/ontology/euvoc#> .
 @prefix prov: <http://www.w3.org/ns/prov#> .
@@ -22,60 +22,106 @@
 @prefix skosxl: <http://www.w3.org/2008/05/skos-xl#> .
 
 <http://www.fairdatacollective.com/template-vocabulary/> a skos:ConceptScheme;
-  skos:prefLabel "Template for building SKOS based controlled vocabulary";
-  dct:title "Template for building SKOS based controlled vocabulary";
+  skos:prefLabel "NIVA's metadata SKOS based controlled vocabulary";
+  dct:title "Metadata vocabulary";
   dct:description "This is a template for building a SKOS-based controlled vocabulary. It is used as base of the worflow described in excel2rdf.readthedocs.io/";
-  dct:creator <https://orcid.org/0000-0002-9381-9694>;
-  dct:contributor <https://orcid.org/0000-0001-6875-5360>;
-  pav:createdOn "2020-10-22T22:00:00+01:00";
-  pav:lastUpdatedOn "2021-02-21T16:32:00-08:00";
+  pav:createdOn "2023-10-22T22:00:00+01:00";
+  pav:lastUpdatedOn <http://www.fairdatacollective.com/template-vocabulary/>;
   pav:version "0.1.2";
-  skos:hasTopConcept temp-vocab:TopConceptOne, temp-vocab:TopConceptTwo .
+  skos:hasTopConcept meta:Collections, meta:ISOTopicCategories, meta:ProcessingLevel,
+    meta:SpatialRepresentationType, meta:License .
 
-temp-vocab:TopConceptOne a skos:Concept;
-  skos:prefLabel "Top Concept One"@en;
-  skos:definition "This is a top concept which is used to collect a number of narrower concepts."@en;
-  dct:creator <https://orcid.org/0000-0002-9381-9693>;
-  dct:contributor <https://orcid.org/0000-0001-6875-5360>;
-  skos:narrower temp-vocab:NarrowConceptOne, temp-vocab:NarrowConceptTwo;
+meta:Collections a skos:Concept;
+  skos:prefLabel "Collections"@en;
+  skos:definition "What should a collection (ie. dataset) refer to? Projects (such as SIOS, MSOURCE)? Or more like e.g. Loggers, Feerybox"@en;
+  skos:narrower meta:SIOS, meta:MSOURCE;
   skos:inScheme <http://www.fairdatacollective.com/template-vocabulary/>;
   skos:topConceptOf <http://www.fairdatacollective.com/template-vocabulary/> .
 
-temp-vocab:NarrowConceptOne a skos:Concept;
-  skos:prefLabel "Narrow Concept One"@en;
-  skos:definition "A definition of NarrowConceptOne, which has a broader concept TopConceptOne."@en;
-  skos:broader temp-vocab:TopConceptOne;
-  dct:creator <https://orcid.org/0000-0001-6875-5360>;
+meta:SIOS a skos:Concept;
+  skos:prefLabel "SIOS"@en;
+  skos:broader meta:Collections;
+  skos:exactMatch <https://vocab.met.no/mmd/Collection_Keywords/SIOS>;
   skos:inScheme <http://www.fairdatacollective.com/template-vocabulary/> .
 
-temp-vocab:NarrowConceptTwo a skos:Concept;
-  skos:prefLabel "Narrow Concept Two"@en;
-  skos:definition "A definition of NarrowConceptTwo, which has a broader concept TopConceptOne."@en;
-  skos:broader temp-vocab:TopConceptOne;
-  dct:creator <https://orcid.org/0000-0001-6875-5360>;
+meta:MSOURCE a skos:Concept;
+  skos:prefLabel "MSOURCE"@en;
+  skos:definition "Datasets related to the MultiSource project"@en;
+  skos:broader meta:Collections;
+  rdfs:seeAlso <https://www.niva.no/prosjekter/multisource>;
   skos:inScheme <http://www.fairdatacollective.com/template-vocabulary/> .
 
-temp-vocab:TopConceptTwo a skos:Concept;
-  skos:prefLabel "Top Concept Two"@en;
-  skos:definition "This is yet another top concept which is used to collect a number of narrower concepts."@en;
-  dct:creator <https://orcid.org/0000-0002-9381-9693>;
-  dct:contributor <https://orcid.org/0000-0001-6875-5360>;
-  skos:narrower temp-vocab:NarrowConceptThree, temp-vocab:NarrowConceptFour;
+meta:ISOTopicCategories a skos:Concept;
+  skos:prefLabel "ISO Topic Categories"@en;
+  skos:definition "Shall we have those?"@en;
+  skos:narrower meta:inlandWaters, meta:oceans;
   skos:inScheme <http://www.fairdatacollective.com/template-vocabulary/>;
   skos:topConceptOf <http://www.fairdatacollective.com/template-vocabulary/> .
 
-temp-vocab:NarrowConceptThree a skos:Concept;
+meta:inlandWaters a skos:Concept;
+  skos:prefLabel "inlandWaters"@en;
+  skos:broader meta:ISOTopicCategories;
+  skos:exactMatch <https://apps.usgs.gov/thesaurus/term-simple.php?thcode=15&code=012>;
+  skos:inScheme <http://www.fairdatacollective.com/template-vocabulary/> .
+
+meta:oceans a skos:Concept;
+  skos:prefLabel "oceans"@en;
+  skos:broader meta:ISOTopicCategories;
+  skos:exactMatch <https://apps.usgs.gov/thesaurus/term-simple.php?thcode=15&code=014>;
+  skos:inScheme <http://www.fairdatacollective.com/template-vocabulary/> .
+
+meta:ProcessingLevel a skos:Concept;
+  skos:prefLabel "Processing Level"@en;
+  skos:definition "A textual description of the processing level of the data"@en;
+  skos:narrower meta:NarrowConceptThree, meta:NarrowConceptFour;
+  skos:inScheme <http://www.fairdatacollective.com/template-vocabulary/>;
+  skos:topConceptOf <http://www.fairdatacollective.com/template-vocabulary/> .
+
+meta:NarrowConceptThree a skos:Concept;
   skos:prefLabel "Narrow Concept Three"@en;
   skos:definition "A definition of NarrowConceptThree, which has a broader concept TopConceptTwo."@en;
-  skos:broader temp-vocab:TopConceptTwo;
-  dct:creator <https://orcid.org/0000-0002-9381-9693>;
-  dct:contributor <https://orcid.org/0000-0001-6875-5360>;
+  skos:broader meta:ProcessingLevel, "temp-vocab:TopConceptTwo";
   skos:inScheme <http://www.fairdatacollective.com/template-vocabulary/> .
 
-temp-vocab:NarrowConceptFour a skos:Concept;
+meta:NarrowConceptFour a skos:Concept;
   skos:prefLabel "Narrow Concept Four"@en;
   skos:definition "A definition of NarrowConceptFour, which has a broader concept TopConceptTwo."@en;
-  skos:broader temp-vocab:TopConceptTwo;
-  dct:creator <https://orcid.org/0000-0002-9381-9693>;
-  dct:contributor <https://orcid.org/0000-0001-6875-5360>;
+  skos:broader meta:ProcessingLevel, "temp-vocab:TopConceptTwo";
   skos:inScheme <http://www.fairdatacollective.com/template-vocabulary/> .
+
+meta:SpatialRepresentationType a skos:Concept;
+  skos:prefLabel "Spatial Representation Type"@en;
+  skos:exactMatch <https://inspire.ec.europa.eu/metadata-codelist/SpatialRepresentationType>;
+  skos:narrower meta:grid, meta:point, meta:trajectory, meta:vector;
+  skos:inScheme <http://www.fairdatacollective.com/template-vocabulary/>;
+  skos:topConceptOf <http://www.fairdatacollective.com/template-vocabulary/> .
+
+meta:grid a skos:Concept;
+  skos:prefLabel "grid"@en;
+  skos:broader meta:SpatialRepresentationType;
+  skos:exactMatch <https://inspire.ec.europa.eu/metadata-codelist/SpatialRepresentationType/grid>;
+  skos:inScheme <http://www.fairdatacollective.com/template-vocabulary/> .
+
+meta:point a skos:Concept;
+  skos:prefLabel "point"@en;
+  skos:broader meta:SpatialRepresentationType;
+  skos:exactMatch <https://vocab.met.no/mmd/Spatial_Representation/point>;
+  skos:inScheme <http://www.fairdatacollective.com/template-vocabulary/> .
+
+meta:trajectory a skos:Concept;
+  skos:prefLabel "trajectory"@en;
+  skos:broader meta:SpatialRepresentationType;
+  skos:exactMatch <https://vocab.met.no/mmd/Spatial_Representation/trajectory>;
+  skos:inScheme <http://www.fairdatacollective.com/template-vocabulary/> .
+
+meta:vector a skos:Concept;
+  skos:prefLabel "vector"@en;
+  skos:broader meta:SpatialRepresentationType;
+  skos:exactMatch <https://inspire.ec.europa.eu/metadata-codelist/SpatialRepresentationType/vector>;
+  skos:inScheme <http://www.fairdatacollective.com/template-vocabulary/> .
+
+meta:License a skos:Concept;
+  skos:prefLabel "License"@en;
+  skos:definition "This is yet another top concept which is used to collect a number of narrower concepts."@en;
+  skos:inScheme <http://www.fairdatacollective.com/template-vocabulary/>;
+  skos:topConceptOf <http://www.fairdatacollective.com/template-vocabulary/> .
