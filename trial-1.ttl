@@ -1,0 +1,76 @@
+@prefix schema: <http://schema.org/> .
+@prefix adms: <http://www.w3.org/ns/adms#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix org: <http://www.w3.org/ns/org#> .
+@prefix xls2rdf: <https://xls2rdf.sparna.fr/vocabulary#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix skosthes: <http://purl.org/iso25964/skos-thes#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix temp-vocab: <http://www.fairdatacollective.com/template-vocabulary/> .
+@prefix qb: <http://purl.org/linked-data/cube#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix doap: <http://usefulinc.com/ns/doap#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+@prefix euvoc: <http://publications.europa.eu/ontology/euvoc#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix skosxl: <http://www.w3.org/2008/05/skos-xl#> .
+
+<http://www.fairdatacollective.com/template-vocabulary/> a skos:ConceptScheme;
+  dct:title "Template for building SKOS based controlled vocabulary";
+  dct:description "This is a template for building a SKOS-based controlled vocabulary. It is used as base of the worflow described in excel2rdf.readthedocs.io/";
+  dct:creator <https://orcid.org/0000-0002-9381-9694>;
+  dct:contributor <https://orcid.org/0000-0001-6875-5360>;
+  skos:hasTopConcept temp-vocab:TopConceptOne, temp-vocab:TopConceptTwo .
+
+temp-vocab:TopConceptOne a skos:Concept;
+  skos:prefLabel "Top Concept One"@en;
+  skos:definition "This is a top concept which is used to collect a number of narrower concepts."@en;
+  dct:creator <https://orcid.org/0000-0002-9381-9693>;
+  dct:contributor <https://orcid.org/0000-0001-6875-5360>;
+  skos:narrower temp-vocab:NarrowConceptOne, temp-vocab:NarrowConceptTwo;
+  skos:inScheme <http://www.fairdatacollective.com/template-vocabulary/>;
+  skos:topConceptOf <http://www.fairdatacollective.com/template-vocabulary/> .
+
+temp-vocab:NarrowConceptOne a skos:Concept;
+  skos:prefLabel "Narrow Concept One"@en;
+  skos:definition "A definition of NarrowConceptOne, which has a broader concept TopConceptOne."@en;
+  skos:broader temp-vocab:TopConceptOne;
+  dct:creator <https://orcid.org/0000-0001-6875-5360>;
+  skos:inScheme <http://www.fairdatacollective.com/template-vocabulary/> .
+
+temp-vocab:NarrowConceptTwo a skos:Concept;
+  skos:prefLabel "Narrow Concept Two"@en;
+  skos:definition "A definition of NarrowConceptTwo, which has a broader concept TopConceptOne."@en;
+  skos:broader temp-vocab:TopConceptOne;
+  dct:creator <https://orcid.org/0000-0001-6875-5360>;
+  skos:inScheme <http://www.fairdatacollective.com/template-vocabulary/> .
+
+temp-vocab:TopConceptTwo a skos:Concept;
+  skos:prefLabel "Top Concept Two"@en;
+  skos:definition "This is yet another top concept which is used to collect a number of narrower concepts."@en;
+  dct:creator <https://orcid.org/0000-0002-9381-9693>;
+  dct:contributor <https://orcid.org/0000-0001-6875-5360>;
+  skos:narrower temp-vocab:NarrowConceptThree, temp-vocab:NarrowConceptFour;
+  skos:inScheme <http://www.fairdatacollective.com/template-vocabulary/>;
+  skos:topConceptOf <http://www.fairdatacollective.com/template-vocabulary/> .
+
+temp-vocab:NarrowConceptThree a skos:Concept;
+  skos:prefLabel "Narrow Concept Three"@en;
+  skos:definition "A definition of NarrowConceptThree, which has a broader concept TopConceptTwo."@en;
+  skos:broader temp-vocab:TopConceptTwo;
+  dct:creator <https://orcid.org/0000-0002-9381-9693>;
+  dct:contributor <https://orcid.org/0000-0001-6875-5360>;
+  skos:inScheme <http://www.fairdatacollective.com/template-vocabulary/> .
+
+temp-vocab:NarrowConceptFour a skos:Concept;
+  skos:prefLabel "Narrow Concept Four"@en;
+  skos:definition "A definition of NarrowConceptFour, which has a broader concept TopConceptTwo."@en;
+  skos:broader temp-vocab:TopConceptTwo;
+  dct:creator <https://orcid.org/0000-0002-9381-9693>;
+  dct:contributor <https://orcid.org/0000-0001-6875-5360>;
+  skos:inScheme <http://www.fairdatacollective.com/template-vocabulary/> .
